@@ -1,0 +1,313 @@
+\section{RESULTS AND ANALYSIS}
+\subsection{Parameters}
+\begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{1.5} %
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Parameters}                     & \textbf{Value}      \\
+        \hline
+        \textbf{Total Datasets}                 & 6                   \\
+        \hline
+        \textbf{Total images}                   & 446K                \\
+        \hline
+        \textbf{Trained images (real and fake)} & 203K , 203K         \\
+        \hline
+        \textbf{Tested images (real and fake)}  & 10K , 10K           \\
+        \hline
+        \textbf{Validation (real and fake)}     & 10.5K , 10.5K       \\
+        \hline
+        \textbf{Balanced}                       & True                \\
+        \hline
+        \textbf{Epochs}                         & 10                  \\
+        \hline
+        \textbf{Batch Size}                     & 32                  \\
+        \hline
+        \textbf{Image Size}                     & 256 x 256           \\
+        \hline
+        \textbf{Channels}                       & 3                   \\
+        \hline
+        \textbf{Patches}                        & 16 x 16             \\
+        \hline
+        \textbf{Encoder Hidden Layers}          & 12                  \\
+        \hline
+        \textbf{Encoder Layers Dimension}       & 768                 \\
+        \hline
+        \textbf{MLP size}                       & 3072                \\
+        \hline
+        \textbf{ Number of Attention Heads }    & 12                  \\
+        \hline
+        \textbf{Loss Function}                  & Cross-Entropy Loss  \\
+        \hline
+        \textbf{Normalization}                  & Layer Normalization \\
+        \hline
+        \textbf{Activation Function}            & GeLU                \\
+        \hline
+        \textbf{Dropout Rate }                  & 0.2                 \\
+        \hline
+        \textbf{Pooling Strategy }              & CLS Token           \\
+        \hline
+    \end{tabular}
+    \caption{Model Parameters}
+    \label{tab:model-parameters}
+\end{table}
+\newpage
+\subsubsection{Performance Metrices}
+
+The performance of our model is associated with various metrics such as:
+\begin{enumerate}
+    \item \textbf{Accuracy:}
+          The accuracy metric measures how correctly the model predicts instances by calculating the ratio of correctly classified instances to the total samples.
+          \begin{equation}
+              Accuracy = \frac{TP + TN}{TP + FP + TN + FN}
+          \end{equation}
+
+    \item \textbf{Precision:}
+          Precision assesses the model's ability to identify positive samples among the actual positives, calculated as the ratio of true positives to the sum of true positives and false positives.
+          \begin{equation}
+              Precision = \frac{TP}{TP + FP}
+          \end{equation}
+
+    \item \textbf{Recall (Sensitivity or True Positive Rate):}
+          Recall measures the model's ability to precisely identify positive samples from the actual positives, calculated as the ratio of true positives to the sum of true positives and false negatives.
+          \begin{equation}
+              Recall = \frac{TP}{TP + FN}
+          \end{equation}
+
+    \item \textbf{F1 Score:}
+          The F1 score, a balance between precision and recall, is advantageous in scenarios with unequal class distribution or equal emphasis on both types of errors. It ranges between 0 and 1, with peak performance at 1.
+          \begin{equation}
+              F1 = \frac{2 \cdot Precision \cdot Recall}{Precision + Recall}
+          \end{equation}
+
+          The table of performance metrics and their corresponding computed values are as follows:
+\end{enumerate}
+
+
+\begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{1.5} %
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Parameters} & \textbf{Value} \\
+        \hline
+        \textbf{Accuracy}   & 0.938          \\
+        \hline
+        \textbf{Precision}  & 0.9678         \\
+        \hline
+        \textbf{Recall}     & 0.9061         \\
+        \hline
+        \textbf{F1 Score}   & 0.93596        \\
+        \hline
+    \end{tabular}
+    \caption{Performance Metrics}
+    \label{tab:metrics}
+\end{table}
+
+
+
+
+
+\newpage
+\subsection{Evaluation}
+\subsubsection{Loss Curve}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width= 5in, height =4in ]{img/lossVsAccuracy.png}
+    \caption{{Training Vs Validation loss Curve}}
+\end{figure}
+\noindent This plot shows how well our model is doing over time. The horizontal line represents the number of times we've trained the model, and the vertical line shows how well it's performing (lower is better). We have two lines on the graph: one for how well the model is doing during training, and another for how well it's doing on new, unseen data. The goal is to have both lines go down, meaning the model is learning well. By analyzing the "Loss vs. Epoch" plot, one can identify various aspects of the model's performance, such as overfitting, underfitting, and the effectiveness of early stopping.
+
+\newpage
+\subsubsection{Accuracy Curve}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=5in, height =5in ]{img/accuracyVsepoch.png}
+    \caption{{Training Vs Validation Accuracy Curve }}
+\end{figure}
+\noindent In this graph, the horizontal axis shows the number of training epochs, while the vertical axis represents the accuracy (both training and validation) of our model. Higher accuracy values indicate better overall performance. The plot typically displays two lines: one for training accuracy, reflecting the model's improvement during training, and another for validation accuracy, indicating how well the model generalizes to new, unseen data. Analyzing the "Accuracy vs. Epoch" plot helps identify aspects of the model's performance, including potential overfitting, underfitting, and the effectiveness of early stopping strategies.
+With the increase of epoch for validation, unlike loss, there is increase in accuracy.
+\newpage
+\subsubsection{Confusion Matrix}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=5in, height =5in ]{img/confusionMatrixImage.png}
+    \caption{{Confusion Matrix }}
+\end{figure}
+\noindent The confusion matrix is a valuable tool for evaluating our model's ability to classify images as either "real" or "fake." Simply put, it organizes results into a grid where rows represent the actual labels of images, columns depict the predicted labels, and the numbers within cells show how many images fall into each category. For instance, the top-left cell indicates that 9,699 images were correctly identified as real. The diagonal of the matrix reveals that a total of 10,000 images were accurately classified, demonstrating the model's effectiveness. However, the presence of off-diagonal elements, like the bottom-right cell showing 9,061 misclassified fake images, points to areas for improvement. While the model performs well overall, these misclassifications suggest some challenges. Through the confusion matrix, we can dive into more specific metrics like accuracy, precision, recall, and F1-score, offering detailed insights to refine the model's image classification capabilities.
+\newpage
+\subsubsection{Receiver Operating Characteristic (ROC) curve:}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=5in, height =5in ]{img/ROC_AUC.png}
+    \caption{{ROC curve }}
+\end{figure}
+
+\noindent The ROC curve visually represents the performance of a binary classification model, such as detecting fake images. The x-axis measures the False Positive Rate (FPR), indicating how often the model incorrectly identifies real images as fake images. The y-axis measures the True Positive Rate (TPR), indicating how often the model correctly identifies fake images. A curve closer to the upper left corner signifies better performance, indicating high TPR and low FPR. The Area Under the Curve (AUC) summarizes overall performance; a value of 0.94, as seen in the image, suggests good segregation  between real and fake images.
+\newpage
+\subsection{K-Fold Cross-Validation}
+
+K-fold cross-validation is a technique used to assess the performance and generalization ability of a machine learning model. It involves splitting the dataset into \(k\) equally sized parts (or folds). The model is trained \(k\) times, each time using \(k-1\) folds as the training data and the remaining fold as the validation data.\\
+
+\begin{table}[ht]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Fold} & \textbf{Validation Accuracy} \\
+        \hline
+        1             & 0.9375                       \\
+        \hline
+        2             & 0.93                         \\
+        \hline
+        3             & 0.927                        \\
+        \hline
+        4             & 0.934                        \\
+        \hline
+        5             & 0.91                         \\
+        \hline
+        6             & 0.926                        \\
+        \hline
+        7             & 0.9255                       \\
+        \hline
+        8             & 0.94                         \\
+        \hline
+        9             & 0.9295                       \\
+        \hline
+        10            & 0.939                        \\
+        \hline
+    \end{tabular}
+    \caption{Validation Accuracy Results for Each Fold}
+    \label{tab:kfold_results}
+\end{table}
+
+\noindent The average validation accuracy across all folds is approximately \(92.85\%\). The model's performance ranges from a minimum accuracy of \(91\%\) to a maximum of \(94\%\), indicating consistency in the model's predictive power. The standard deviation of \(0.00835\) is a measure of how much the accuracies deviate from the average, providing insights into the stability and reliability of the model across different folds. This suggests that the deepfake detection model using ViTs has achieved a consistently high level of accuracy across multiple folds.
+
+\noindent The trends or patterns observed in the validation accuracies can help in understanding how well our integrated model generalizes to unseen data and its overall performance.
+
+
+\newpage
+\subsection{Model Inference Results }
+\begin{enumerate}
+    \item \textbf{True Positive:}
+          \\
+
+          \begin{figure}[ht]
+              \centering
+              \includegraphics[height =5in  ]{img/ranveerResult.jpg}
+              \caption{{True Positive Result}}
+          \end{figure}
+
+          Here is a result of a true positive result. The model accurately identified and highlighted the real image, demonstrating its capability to correctly detect positive instances.
+
+          \newpage
+    \item \textbf{False Positive:}
+          \\
+          \begin{figure}[ht]
+              \centering
+              \includegraphics[height =5in  ]{img/blckzukeOutput.jpg}
+              \caption{{False Positive Result}}
+          \end{figure}
+
+          The model incorrectly identified the image as real image whereas the image was a fake. This highlights a potential limitation or area for improvement in our model's performance.
+
+          \newpage
+
+    \item \textbf{True Negative}
+          \\
+          \begin{figure}[ht]
+              \centering
+              \includegraphics[height =5in ]{img/oldmanResult.jpg}
+              \caption{{True Negative Result}}
+          \end{figure}
+
+          The model correctly identified and indicated the characteristics of the given input image and labelled it as fake image, demonstrating its ability to correctly detect negative instances as well.
+          \newpage
+
+
+    \item \textbf{False Negative}
+          \\
+          \begin{figure}[ht]
+              \centering
+              \includegraphics[height =5in ]{img/dashainResult.jpg}
+              \caption{{False Negative Result}}
+          \end{figure}
+
+          This result illustrates a false negative situation. The model incorrectly categorized a genuine image as fake, potentially due to the absence of a bare face. The external features can also contribute as a factor like the presence of a 'tika' on the face, indicating a limitation in the model that requires improvement.
+
+          \newpage
+
+\end{enumerate}
+% \subsection{Work Completed}
+% \subsubsection{User Interface of Mobile application}
+% % \begin{itemize}
+% %     \item a
+% % \end{itemize}
+% \subsubsection{Backend}
+% % \begin{itemize}
+
+% % \end{itemize}
+% \subsubsection{Machine Learning Model}
+% % \begin{itemize}
+
+% % \end{itemize}
+
+% \subsection{Work Remaining}
+% % \begin{itemize}
+
+% % \end{itemize}
+
+\newpage
+\subsection{UI of Project}
+We have used React Native for the development of our mobile application.
+Following are the UIs with user authentication, login page and home page where we can upload images to be classified as fake and real.\\
+
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[height=5in]{img/image.png}
+        \caption{{Login Page}}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[height=5in]{img/signup.png}
+        \caption{{Sign-up form}}
+    \end{subfigure}
+    \caption{Login and Sign-up}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[height=5in]{img/Homepage.png}
+        \caption{{Home Page}}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[height=5in]{img/uploaderv3.png}
+        \caption{{Uploader}}
+    \end{subfigure}
+    \caption{Home Page and Uploader}
+\end{figure}
+
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[height=5in]{img/Results.png}
+        \caption{{Result}}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[height=5in]{img/Historyv2.png}
+        \caption{{History page}}
+    \end{subfigure}
+    \caption{Result and History page}
+\end{figure}

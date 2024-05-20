@@ -1,0 +1,171 @@
+\include{commands}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{datetime}
+\usepackage{subcaption}
+\usepackage{caption}
+\captionsetup{font=it}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{setspace}
+\usepackage{titletoc}
+\usepackage{changepage}
+
+% Set font size for titles in Table of Contents, List of Figures, and List of Tables
+\renewcommand{\contentsname}{\normalfont\fontsize{14}{16}\bfseries Table of Contents}
+\renewcommand{\listfigurename}{\normalfont\fontsize{14}{16}\bfseries List of Figures}
+\renewcommand{\listtablename}{\normalfont\fontsize{14}{16}\bfseries List of Tables}
+
+
+% Redefine sectioning commands to change font size
+\titleformat{\section}{\normalfont\fontsize{14}{16}\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\fontsize{12}{16}\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\fontsize{12}{16}\bfseries}{\thesubsubsection}{1em}{}
+\onehalfspacing
+\setstretch{1.5}
+
+\begin{document}
+
+\cftsetindents{figure}{0em}{3em}
+\cftsetindents{table}{0em}{3em}
+\include{0ACover/1title}
+\include{0ACover/0cover}
+\newpage
+% Add Acknowledgement to TOC
+\addcontentsline{toc}{section}{DECLARATION} % Add Acknowledgement to TOC
+\include{0ACover/3declaration}
+\newpage
+
+\addcontentsline{toc}{section}{CERTIFICATE OF APPROVAL} % Add Acknowledgement to TOC
+\include{0ACover/7certificateOfApproval}
+\newpage
+\addcontentsline{toc}{section}{COPYRIGHT} % Add Acknowledgement to TOC
+\include{0ACover/2copyright}
+\newpage
+\addcontentsline{toc}{section}{DEPARTMENTAL ACCEPTANCE}% Add Acknowledgement to TOC
+\include{0ACover/NewDeclare}
+\newpage
+
+
+\addcontentsline{toc}{section}{ACKNOWLEDGEMENT} % Add Acknowledgement to TOC
+\include{0ACover/6acknowledgement}
+\newpage
+
+\addcontentsline{toc}{section}{ABSTRACT} % Add Abstract to TOC
+\include{0HAbstract/abstract}
+\newpage
+
+\tableofcontents
+\addtocontents{toc}{\protect\setlength{\cftbeforetoctitleskip}{0em}}
+\newpage
+
+
+\listoffigures
+\addcontentsline{toc}{section}{List of Figures}
+\newpage
+\listoftables
+\addcontentsline{toc}{section}{List of Tables}
+\newpage
+
+\addcontentsline{toc}{section}{List of Abbreviations} % Add Abstract to TOC
+\include{0IAbbreviations/abbreviations}
+% \thispagestyle{empty}
+
+\input{1Introduction/introduction}
+
+
+\input{1Introduction/background}
+\newpage
+\input{1Introduction/Motivation}
+
+
+
+\input{1Introduction/problemstatement}
+
+\input{1Introduction/objectives}
+
+\input{1Introduction/scope}
+
+
+
+% \include{1Introduction/Originality}
+
+\input{1Introduction/Potential Application}
+
+
+\input{1Introduction/organization_of_report}
+\newpage
+
+\include{2Literaturereview/literaturereview}
+
+
+\input{2Literaturereview/existing}
+
+
+\include{2Literaturereview/proposed}
+\newpage
+
+\include{3FeasibilityStudy/feasibility_study}
+\newpage
+
+
+\include{5BlockDiagrams/system_architecture}
+\newpage
+\include{5BlockDiagrams/use_case_diagram}
+\newpage
+
+\include{5BlockDiagrams/sequence_diagram}
+
+\include{5BlockDiagrams/dataFlow_diagram}
+\include{5BlockDiagrams/class diagram}
+
+\include{5BlockDiagrams/activity_diagram}
+\newpage
+
+
+
+% \include{4Methodology/methodology}
+\input{4Methodology/Deepfakes}
+
+\input{4Methodology/learningfeatures}
+% \include{4Methodology/Approach_of_Model}
+\input{4Methodology/Vision_Transformer}
+% \input{4Methodology/benefits_of_vit}
+\input{4Methodology/mathematical_modeling}
+\input{4Methodology/Data_Collection}
+\newpage
+\input{4Methodology/Algorithm}
+\newpage
+\include{4Methodology/Data_preprocessing}
+\nobreak
+\include{4Methodology/Working_principle}
+\include{4Methodology/verification}
+\include{4Methodology/Application development}
+
+
+
+
+\newpage
+
+
+
+\include{Result_and_Analysis/Result_and_Analysis}
+\newpage
+
+\include{8FutureEnhancements/future_enhancements}
+\newpage
+
+\include{7Limitations/limitations}
+\newpage
+
+\include{6ExpectedOutcomes/expected_outcomes}
+\newpage
+\include{Appendix/appendix1}
+\newpage
+\addcontentsline{toc}{section}{References}
+\include{References/references}
+
+\end{document}

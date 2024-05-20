@@ -1,0 +1,23 @@
+\subsection{Loss function }
+The loss function plays a crucial role during training phase. It acts as a measure of how far the model's predictions deviate from the correct answers. The objective is to minimize this difference over time. As the ViT undergoes training, it adapts its internal settings based on the guidance provided by the loss function, aiming to enhance its accuracy in making predictions. This iterative process is fundamental to the ViT's learning mechanism and its overall performance improvement.
+
+\subsubsection{Cross-Entropy Loss}
+The primary loss utilized in ViT is the Cross-Entropy Loss, also known as categorical cross-entropy. This loss is well-suited for classification problems, such as image classification. It quantifies the difference between the predicted probability distribution (produced by the softmax activation) and the true distribution of class labels.
+\\
+\\
+Mathematically, the Cross-Entropy Loss for a single training example is defined as:
+\\
+
+\begin{align}
+    L(y, \hat{y}) & = -\sum_i y_i \cdot \log(\hat{y}_i) \label{eq:loss_function}
+\end{align}
+
+
+\text{where:}
+\begin{align*}
+    y       & \text{ is the ground truth label vector,}                 \\
+    \hat{y} & \text{ is the predicted probability distribution vector,} \\
+    i       & \text{ iterates over all classes.}
+\end{align*}
+\\
+Cross-Entropy Loss is preferred for image classification, including with Vision Transformers, due to its alignment with classification objectives, compatibility with softmax activation, and effective handling of probability distributions. Its use encourages accurate and calibrated predictions during training.
