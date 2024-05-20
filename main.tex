@@ -21,11 +21,12 @@
 
 
 % Redefine sectioning commands to change font size
-\titleformat{\section}{\normalfont\fontsize{14}{16}\bfseries}{\thesection}{1em}{}
+\titleformat{\section}{\centering\normalfont\fontsize{14}{16}\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalfont\fontsize{12}{16}\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalfont\fontsize{12}{16}\bfseries}{\thesubsubsection}{1em}{}
 \onehalfspacing
 \setstretch{1.5}
+
 
 \begin{document}
 
@@ -42,11 +43,11 @@
 \addcontentsline{toc}{section}{CERTIFICATE OF APPROVAL} % Add Acknowledgement to TOC
 \include{0ACover/7certificateOfApproval}
 \newpage
-\addcontentsline{toc}{section}{COPYRIGHT} % Add Acknowledgement to TOC
-\include{0ACover/2copyright}
-\newpage
 \addcontentsline{toc}{section}{DEPARTMENTAL ACCEPTANCE}% Add Acknowledgement to TOC
 \include{0ACover/NewDeclare}
+\newpage
+\addcontentsline{toc}{section}{COPYRIGHT} % Add Acknowledgement to TOC
+\include{0ACover/2copyright}
 \newpage
 
 
@@ -78,7 +79,7 @@
 
 
 \input{1Introduction/background}
-\newpage
+
 \input{1Introduction/Motivation}
 
 
