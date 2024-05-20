@@ -1,88 +1,41 @@
 
 \section{REQUIREMENT ANALYSIS}
 
-\subsection{Functional Requirement}
-The functional requirements of the system are:
-\begin{enumerate}
-    \item Authentication of users.
-    \item User-friendly interface for uploading and detection.
-    \item Image preprocessing.
-    \item Mathematical Modeling and Implication.
-    \item Model Development and training.
-    \item Testing and Validation.
-
-\end{enumerate}
-
-\subsection{Non Functional Requirement}
-\justify
-These requirements are not needed by the system but are essential for the better
-performance of software. The points below focus on the non-functional requirement of
-the system.
-\begin{enumerate}
-    \item Reliability
-    \item   Usability
-    \item   Security
-    \item   Portability
-    \item   Speed and responsiveness
-    \item   Performance
-\end{enumerate}
-
 \subsection{Feasibility Study}
-
-\subsubsection{Economic feasibility}
-This is a low-budget project with no development costs. The total expenditure of the
-project is just computational power. The dataset and computational power required for
-the project ware readily available. The computational power was provided by google
-collab. So, the project was economically feasible. The system will be simple to
-comprehend and use.
+\subsubsection{Economically Feasibility}
+The development and implementation of the HelloPet app demonstrate strong economical feasibility. With a growing market of pet owners seeking convenient and comprehensive solutions, the app has the potential to generate significant revenue through various channels, including in-app purchases, advertising partnerships, and premium subscriptions. Additionally, cost-effective cloud infrastructure and scalable development technologies contribute to lower operational costs and higher profit margins. Market research indicates a high demand for pet-related services and products, suggesting a favorable market environment for the HelloPet app. The projected return on investment and potential for sustained revenue growth position the app as a financially viable venture.
 
 \subsubsection{Operational feasibility}
-The project has been operationally feasible, as after the completion of our project, the operation through the developed can be carried out for the detection of deepfakes.
+The HelloPet app demonstrates strong operational feasibility due to its user-friendly interface, scalable architecture, and efficient utilization of resources. The app is designed to run on multiple platforms, including smartphones and tablets, making it accessible to a wide range of users. Additionally, the app leverages cloud-based technologies for data storage and processing, enabling seamless scalability as user demand grows. Extensive testing and quality assurance measures will be implemented to ensure a robust and reliable app experience. Overall, the HelloPet app exhibits strong operational feasibility, positioning it for successful implementation and sustained operations.
 
 \subsubsection{Technical feasibility}
-Our project's technical feasibility is assured by user-friendly tools like React Native, Keras and Google Colab. Keras simplified the implementation of our model, while Google Colab provides a collaborative and accessible environment for efficient development and training.
+The HelloPet app demonstrates strong technical feasibility due to its utilization of modern technologies, compatibility with various platforms, and efficient integration of features. Furthermore, the integration of features like scheduling, training resources, and community engagement will be implemented using robust backend infrastructure and secure APIs. The app's technical feasibility is further supported by the availability of reliable third-party services for features such as vet locator and product search. Overall, the HelloPet app is technically feasible and well-positioned for successful development and deployment.
 
-\subsection{System Development Tools}
-Our Deepfake detection System requires and incorporates the tools which are listed below:
+\subsection{Software Requirements}
 \begin{enumerate}
-    \item Python Modules:
-          \begin{itemize}
-              \item NumPy:
-                    Used for numerical operations and handling multi-dimensional arrays efficiently.
-                    Employed in the data preprocessing phase for manipulation and transformation of image data.
-
-              \item Keras:
-                    A high-level deep learning API that simplifies the process of building and training neural networks.
-                    Applied for building and training the deep fake detection model.
-
-              \item Matplotlib:
-                    Used for data visualization, helpful for understanding model performance and debugging.
-                    Applied for plotting graphs and visualizing images during the analysis phase.
-          \end{itemize}
-
-    \item Google Colab:
-          Provides a free cloud-based Jupyter notebook environment with GPU support, suitable for training deep learning models.
-          Used for developing, training, and experimenting with the deep fake detection model.
-
-    \item OpenCV:
-          An open-source computer vision library that aids in image and video processing.
-          Utilized for tasks like image loading, preprocessing, and post-processing during both training and inference phases.
-
-    \item React Native:
-          A framework for building mobile applications using JavaScript and React.
-          Used for developing the mobile application interface for users to interact with the deep fake detection system.
-
-    \item Expo Library:
-          A set of tools and services for building React Native applications more efficiently.
-          Enhances the development process and simplifies the deployment of the React Native application.
-
-    \item Git/GitHub:
-          Version control system for tracking changes in the codebase, collaborating with team members, and managing project versions.
-          Used throughout the project for maintaining code integrity and facilitating collaboration.
-
-    \item FastAPI:
-          A modern, fast web framework for building APIs with Python 3.7+ based on standard Python type hints.
-          Used for developing the backend API that connects the React Native application with the deep fake detection model.
+    \item 
+    \textbf{Flutter} Flutter is an open-source UI toolkit developed by Google. It enables the development of cross-platform mobile applications using a single codebase. Flutter's fast rendering engine, hot reload feature, and rich set of pre-designed widgets make it a popular choice for building responsive and visually appealing mobile apps \cite{14}. 
+     
+    \item\textbf{Dart} Dart is a programming language primarily used for developing applications with Flutter. It offers a modern and efficient syntax, strong type system, and excellent performance. Dart's asynchronous programming capabilities, support for object-oriented principles, and extensive libraries make it well-suited for building robust and scalable mobile applications \cite{15}. 
+     
+    \item\textbf{PostgresSQL} 
+    PostgreSQL is an open-source relational database management system renowned for its robustness and flexibility. It efficiently organizes and manages data, ensuring reliability and security. Its versatility and scalability make it an ideal choice for the app, offering a stable and secure foundation for storing and retrieving pet-related data, user profiles, community interactions, and adoption records. Its open-source nature aligns with the app's cost-effectiveness, facilitating seamless data handling and management \cite{16}.
+    
+    
+    \item\textbf{Neon}
+    Neon allows you to instantly branch your Postgres database to support modern development workflows. You can create branches for test environments and for every other use case you need. Neon.tech brings serverless architecture to Postgres, offering flexible usage and volume-based plans. It is an open-source Postgres-compatible database that features branching, treating data the same as code. Neon.tech is a fully managed serverless Postgres with a generous free tier. It separates storage and compute and offers modern developer tools \cite{17}.
+    
+    \item\textbf{Python} Python is a high-level programming language known for its simplicity and readability. It's widely used for web development, scientific computing, data analysis, and artificial intelligence. With an extensive library ecosystem, Python facilitates efficient coding and rapid development. Its versatility, from scripting to complex applications, makes it a popular choice among programmers \cite{18}.
+    
+    \item\textbf{Pytorch}
+    PyTorch, a machine learning framework, is recognized for its flexibility and dynamic computation capabilities. It provides a platform for building and training neural networks, offering an extensive library of tools and modules for deep learning tasks. In the app, PyTorch facilitated breed detection through its  extensive support for neural network architectures. Its flexibility allowed seamless experimentation with different models and algorithms, enabling the development of accurate breed detection models \cite{21}.
+    
+    \item\textbf{Pandas}
+    Pandas is a open-source library in Python used for data manipulation and analysis. It provides a versatile set of tools for handling structured data and performing operations such as filtering, grouping, and aggregating datasets. In the app, Pandas played a pivotal role in managing and preprocessing datas for the ML models \cite{19}.
+    
+    \item\textbf{Scikit-learn}
+    Scikit-learn, often abbreviated as sklearn, is a versatile machine learning library in Python. It offers a wide array of tools for various machine learning tasks, including classification, regression, clustering, and more. In the app, sklearn was instrumental in analyzing and predicting pet diseases based on symptoms. Its  implementation of machine learning algorithms allowed for the development of predictive models for disease analysis \cite{20}.
+    
 \end{enumerate}
 
 \newpage

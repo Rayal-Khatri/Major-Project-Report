@@ -13,12 +13,13 @@
 \usepackage{setspace}
 \usepackage{titletoc}
 \usepackage{changepage}
-
+\usepackage[inkscapearea=page]{svg}
 % Set font size for titles in Table of Contents, List of Figures, and List of Tables
 \renewcommand{\contentsname}{\normalfont\fontsize{14}{16}\bfseries Table of Contents}
 \renewcommand{\listfigurename}{\normalfont\fontsize{14}{16}\bfseries List of Figures}
 \renewcommand{\listtablename}{\normalfont\fontsize{14}{16}\bfseries List of Tables}
 
+\usepackage{svg}
 
 % Redefine sectioning commands to change font size
 \titleformat{\section}{\centering\normalfont\fontsize{14}{16}\bfseries}{\thesection}{1em}{}
@@ -103,10 +104,10 @@
 \include{2Literaturereview/literaturereview}
 
 
-\input{2Literaturereview/existing}
+%\input{2Literaturereview/existing}
 
 
-\include{2Literaturereview/proposed}
+%\include{2Literaturereview/proposed}
 \newpage
 
 \include{3FeasibilityStudy/feasibility_study}
@@ -117,13 +118,13 @@
 \newpage
 \include{5BlockDiagrams/use_case_diagram}
 \newpage
+\include{5BlockDiagrams/activity_diagram}
 
 \include{5BlockDiagrams/sequence_diagram}
 
 \include{5BlockDiagrams/dataFlow_diagram}
-\include{5BlockDiagrams/class diagram}
+%\include{5BlockDiagrams/class diagram}
 
-\include{5BlockDiagrams/activity_diagram}
 \newpage
 
 

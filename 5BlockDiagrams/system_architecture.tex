@@ -1,10 +1,57 @@
 \section{SYSTEM ARCHITECTURE AND METHODOLOGY }
 \subsection{Block Diagram}
-\begin{figure}[h]
-    \centering
-    \includegraphics[width= 6in ]{img/Model_ArchitectureV2.drawio.png}
-    \caption{{System Block Diagram}}
 
-\end{figure}
 \justify
-The System Block Diagram of our project involves multiple steps. Initially, the formation of datasets takes place as raw data are collected to training, testing and validation  The frames are extracted from the input video or obtained directly from an image. These frames then undergo face extraction, where faces are identified and cropped using face detection algorithms. The extracted faces are resized to a standardized size and undergo normalization to ensure consistent pixel values. The preprocessed face images are then fed into a ViT model for classification. The model analyzes the features and patterns in the images to determine whether they are real or fake. Finally, the system produces the output, indicating the authenticity of the input video or image as either real or fake.
+\vspace{.5cm}
+\begin{figure}[H]
+\centering
+\includegraphics*[width=0.8\linewidth]{img/System_overview.pdf}
+\caption{System Overview}
+\label{fig:system-overview}
+\end{figure}
+
+  \textbf{Hello Pet}\\ The journey begins with the "Hello Pet" module, serving as the entry point for users. Upon entering the system, users are prompted to either log in with existing credentials or register for a new account, ensuring a personalized experience for each user.
+
+ \noindent \textbf{Breed Detection and Symptom Analysis}\\ The subsequent stages involve advanced functionalities such as breed detection and symptom analysis. The breed detection feature allows users to identify the breed of their pets accurately, enhancing their understanding and knowledge about their furry companions. Simultaneously, the symptom analysis tool aids in recognizing potential health issues in pets based on observed symptoms, providing valuable insights for prompt veterinary attention.
+
+\noindent  \textbf{User and Pet Profiles}\\ The creation of user and pet profiles is a pivotal step in personalizing the user experience. This module further branches into distinct features, including:
+  \begin{itemize}
+    \item \textbf{Adoption:} Facilitates the process of adopting pets, connecting users with animals in need of loving homes.
+    \item \textbf{Shop Products:} Caters to the needs of pet owners, offering a curated selection of pet-related products.
+    \item \textbf{Scheduling:} Provides a tool for users to organize and manage their daily pet-related activities.
+    \item \textbf{Community Pets:} Fosters a sense of community among pet owners, allowing them to share experiences, seek advice, and engage with other like-minded individuals.
+  \end{itemize}
+
+
+\subsection{Block Diagram}
+\vspace{1.5cm}
+\begin{figure}[H]
+\centering
+\includegraphics*[width=0.8\linewidth]{img/Block_Diagram_Breed.pdf}
+\caption{Breed Detection System Block Diagram}
+\label{fig:system-overview}
+\end{figure}
+Our application's breed detection system adheres to a structured workflow. Commencing with the acquisition of data, a comprehensive dataset comprising diverse pet images is gathered. Following this, the data undergoes preprocessing to ensure proper formatting for training purposes. The subsequent stage involves feature extraction, a critical step in the process that involves extracting relevant features from the dataset. The algorithm undergoes training using the prepared dataset, with parameters being iteratively adjusted to enhance performance. Ultimately, the model undergoes evaluation to assess its effectiveness, utilizing a testing dataset and evaluating metrics such as accuracy. This systematic approach ensures a robust and accurate breed detection system within our application.
+
+
+\subsection{Post recommendation System}
+\vspace{1.5cm}
+\begin{figure}[H]
+\centering
+\includegraphics*[width=0.8\linewidth]{img/Block_diagram_Colaborate.pdf}
+\caption{Content Based Filtering Block Diagram}
+\label{fig:system-overview}
+\end{figure}
+The post recommendation system operates through a structured process. Initially, the input data undergoes preprocessing steps such as converting to lowercase, removing punctuation, managing slang words and emojis, and stemming the text. Subsequently, the system calculates attribute percentages using a Bag of Words technique, transforming the data into a vector format. This vector is then utilized by the algorithm to generate the top 10 recommendations.
+
+
+
+\subsection{Symptoms Analysis System}
+\vspace{1.5cm}
+\begin{figure}[H]
+\centering
+\includegraphics*[width=0.8\linewidth]{img/Block_Diragram_MPL.pdf}
+\caption[Symptoms Analysis System Block Diagram]{Symptoms Analysis System Block Diagram}
+\label{fig:System block diagram}
+\end{figure}
+The symptoms analysis system initiates with the comprehensive collection of raw data, covering diverse aspects of pet behavior and health records. This raw data undergoes a meticulous preprocessing phase, which includes cleaning, transformation, and normalization to ensure data integrity and uniformity. Following this, the data is strategically divided into training and testing sets, emphasizing the importance of this partition in optimizing model performance.The model undergoes a fine-tuning process through iterative adjustments, utilizing the training set for model enhancement and the validation set for performance evaluation. The seamless progression from input data to model training constitutes a streamlined process designed to predict and analyze pet symptoms, ultimately contributing to the heightened efficacy of the HelloPet app. 
