@@ -1,180 +1,234 @@
-\subsection{Mathematical Modeling}
-
-\subsubsection{Activation Function: Gaussian Error Linear Unit (GELU)}
-Activation functions play a crucial role in introducing non-linearity to the feedforward neural network layers. Following the self-attention mechanism's processing of input data, the results traverse through the feedforward neural network. This network involves linear transformations, and activation functions, such as the Gaussian Error Linear Unit (GELU), are applied element-wise. Activation functions enable the network to grasp and approximate complex, non-linear relationships within the data.
-
-\noindent The Gaussian Error Linear Unit (GELU) stands as an essential activation function within artificial neural networks. Specifically designed to introduce non-linearity to computational processes, GELU offers a seamless approximation to the rectifier linear unit (ReLU) while preserving differentiability.
-
-\noindent Two formulations of the GELU function are commonly used:
-\begin{equation}
-    \text{GELU}(x) = 0.5x \left(1 + \tanh\left(\frac{\pi}{2} \cdot \left(x + 0.044715x^3\right)\right)\right) \label{eq:gelu}
-\end{equation}
-
-\noindent and
-
-\begin{equation}
-    \text{GELU}(x) = \frac{1}{2}x \left(1 + \text{erf}\left(\frac{x}{\sqrt{2}}\right)\right) \label{eq:gelu2}
-\end{equation}
-
-\noindent Where:
+\subsubsection{Mathematical Modeling}
+\textbf{MLP Classifier }
 \begin{itemize}
-    \item $x$ is the input to the GELU function.
-    \item $\text{erf}(z)$ is the error function.
-    \item $\pi$ represents the mathematical constant pi.
-    \item $\sqrt{2}$ is the square root of 2.
+\item{\textbf{Input Layer Structure:}}
+The input layer consists of $n$ nodes, each representing a feature of the input data. The input data is denoted as $\mathbf{X}$, where $\mathbf{X} = [x_1, x_2, \ldots, x_n]$.
+
+\item{\textbf{Hidden Layer Computation:}}
+Let $L$ be the total number of layers in the network, including the input and output layers. The hidden layers (excluding the input and output layers) can be represented as $1 \leq l \leq L - 1$. The output of the $l$-th layer, denoted as $h^{(l)}$, is computed as follows:
+\begin{equation}
+h^{(l)} = \sigma^{(l)}\left(W^{(l)}h^{(l-1)} + b^{(l)}\right)
+\end{equation}
+
+Where
+\begin{itemize}
+  \item $W^{(l)}$ is the weight matrix for the $l$-th layer.
+  \item $b^{(l)}$ is the bias vector for the $l$-th layer.
+  \item $\sigma^{(l)}$ is the activation function applied element-wise. Common activation functions include ReLU (Rectified Linear Unit), Sigmoid, or Hyperbolic Tangent (tanh).
+\end{itemize}
+Suppose we have
+\[
+h^{(l-1)} = [0.5, 0.3, 0.7] \quad \text{(output from the previous layer)}
+\]
+\[W^{(l)} = [0.2, -0.4, 0.6] \quad \text{(weights for neuron h in layer l)}
+\]
+\[b^{(l)} = 0.1 \quad \text{(bias for neuron h in layer l)}\]
+
+Using the formula
+\[
+z^{(l)} = (0.2 \times 0.5) + (-0.4 \times 0.3) + (0.6 \times 0.7) + 0.1
+\]
+\[z^{(l)} = 0.1 - 0.12 + 0.42 + 0.1 = 0.5\]
+
+\noindent Apply sigmoid activation function
+\[
+h^{(l)} = \sigma(0.5)
+\]
+\[h^{(l)} = \frac{1}{1 + e^{-0.5}}\]
+\[h^{(l)} \approx \frac{1}{1 + e^{-0.5}} \approx \frac{1}{1 + 0.606} \approx \frac{1}{1.606} \approx 0.623\]
+\item{\textbf{Output Layer}}
+\begin{itemize}
+    \item {Binary Classification}
+For a binary classification problem, the output layer ($L$-th layer) typically uses the sigmoid activation function:
+\begin{equation}
+\hat{y} = \sigma^{(L)}\left(W^{(L)}h^{(L-1)} + b^{(L)}\right)
+\end{equation}
+
+Suppose we have
+\[
+h^{(L-1)} = [0.6, 0.4, 0.8] \text{ (output from the previous layer)}
+\]
+\[
+W^{(L)} = [0.3, -0.2, 0.5] \text{ (weights for the final layer)}
+\]
+\[
+b^{(L)} = -0.1 \text{ (bias for the final layer)}
+\]
+
+Using the formula
+\[
+z^{(L)} = (0.3 \times 0.6) + (-0.2 \times 0.4) + (0.5 \times 0.8) - 0.1
+\]
+\[
+z^{(L)} = 0.18 - 0.08 + 0.4 - 0.1 = 0.4
+\]
+
+Apply sigmoid activation function
+\[
+\hat{y} = \sigma(0.4)
+\]
+\[
+\hat{y} = \frac{1}{1 + e^{-0.4}}
+\]
+\[
+\hat{y} \approx \frac{1}{1 + e^{-0.4}} \approx \frac{1}{1 + 0.67} \approx \frac{1}{1.67} \approx 0.599
+\]
+
+So, the output (\( \hat{y} \)) of the final layer would be approximately 0.599.
+
+% \item {Multi-class Classification}
+% For a multi-class classification problem, the softmax activation function is commonly used:
+% \begin{equation}
+% \hat{y} = \text{softmax}\left(W^{(L)}h^{(L-1)} + b^{(L)}\right)
+% \end{equation}
 \end{itemize}
 
-\noindent The GELU activation function is often used in neural network architectures due to its smoothness and differentiability properties, making it suitable for gradient-based optimization during training.
-
-\noindent Additionally, consider the mathematical expression:
+\item{\textbf{Loss Function}}
+\begin{itemize}
+    \item{Binary Cross-Entropy Loss}
+For binary classification, the binary cross-entropy loss is commonly used:
 \begin{equation}
-    P(X = c) \label{eq:probability}
+\text{Binary Cross-Entropy} = -\frac{1}{N} \sum_{i=1}^N \left(y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i)\right)
 \end{equation}
+Suppose we have:
 
-\noindent where $X$ represents a random variable and $c$ is a constant value. This expression is used to represent the probability that the random variable $X$ takes on the value $c$.
+True labels \( y_i = [1, 0, 1, 0, 1] \) (binary labels indicating the presence or absence of the positive class)
+Predicted probabilities \( \hat{y}_i = [0.8, 0.3, 0.9, 0.2, 0.6] \) (predicted probabilities of the positive class for each sample)
 
-\noindent When no activation function is used in a neural network, the model essentially reduces to a linear regression or a linear transformation. Consequently, the entire neural network collapses into a single linear transformation, regardless of the number of layers. This severely limits the expressive power of the network, as it can only learn linear relationships in the data.
+Using the formula:
 
-\noindent Compared to Rectified Linear Unit (ReLU) and Exponential Linear Unit (ELU), the Gaussian Error Linear Unit (GELU) activation function stands out for its smoothness, handling of negative inputs, and ability to capture complex patterns. ReLU sets all negative values to zero during the forward pass, which can lead to "dead neurons" that never activate and do not contribute to learning. This can result in a loss of information and slower convergence during training. Whereas, ELU largely suffers from vanishing gradient problem.
+Calculate the binary cross-entropy loss for each sample:
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=6in]{img/gelu vs relu.png}
-    \caption{{GeLU vs ReLU vs ELU graph}}
-\end{figure}
+For the first sample: 
+\[
+- (1 \times \log(0.8) + (1 - 1) \times \log(1 - 0.8)) = - (\log(0.8))
+\]
 
-\subsubsection{Loss Function}
-The loss function employed in the Vision Transformer (ViT) model is a critical component for training the network and optimizing its performance in image classification tasks. The loss function is designed to measure the disparity between the predicted class probabilities and the ground truth labels.
+Similarly for all samples
 
-\paragraph{Cross-Entropy Loss :}
-The primary loss utilized in ViT is the Cross-Entropy Loss, also known as categorical cross-entropy. It quantifies the difference between the predicted probability distribution (produced by the softmax activation) and the true distribution of class labels.
+Compute the average binary cross-entropy loss over all samples:
 
-\noindent Mathematically, the Cross-Entropy Loss for a single training example is defined as:
+Binary Cross-Entropy
+\[
+= - \frac{1}{5} \left[ \log(0.8) + \log(0.7) + \log(0.9) + \log(0.8) + \log(0.6) \right]\approx 0.2838\]
 
+\end{itemize}
+% \item{Categorical Cross-Entropy Loss}
+% For multi-class classification, the categorical cross-entropy loss is commonly used:
+% \begin{equation}
+% \text{Categorical Cross-Entropy} = -\frac{1}{N} \sum_{i=1}^N \sum_{j=1}^C y_{ij} \log(\hat{y}_{ij})
+% \end{equation}
+
+% Where $N$ is the number of samples, $C$ is the number of classes, $y_{ij}$ is 1 if the true label of sample $i$ is class $j$, and 0 otherwise.
+% \end{itemize}
+  
+\item {\textbf{Backward Pass (Backpropagation):}}
+The weights and biases are updated using gradient descent or its variants. The gradients are computed using the chain rule of calculus, and the backpropagation algorithm is employed to efficiently calculate these gradients through the network.
+\end{itemize}
+
+
+\noindent\textbf{ResNet50 Architecture}\\
+The ResNet50 architecture involves stacking multiple residual and bottleneck blocks. Here is a high-level overview:
+\begin{itemize}
+   \item{Initial Convolution Layer}
+\begin{itemize}
+  \item 7x7 convolution with a stride of 2.
+  \item Batch normalization and ReLU activation.
+\end{itemize}
+
+\item{Stages}
+Four stages (conv2\_x, conv3\_x, conv4\_x, conv5\_x), each containing multiple blocks. The first block in each stage has a stride of 2 to downsample the spatial dimensions.
+
+\item{Global Average Pooling}
+After the last stage, global average pooling is applied to reduce the spatial dimensions to 1x1.
+
+\item{Fully Connected Layer}
+A fully connected layer for classification.
+\end{itemize}
+\begin{itemize}
+
+\item {\textbf{Basic Building Blocks of Deep Learning}}
+\item {Convolutional Layer}
 \begin{equation}
-    L(y, \hat{y}) = -\sum_i y_i \cdot \log(\hat{y}_i) \label{eq:loss_function}
+\text{conv}(\mathbf{x}) = \text{Conv}(\mathbf{x}, \mathbf{W}) + \mathbf{b}
 \end{equation}
-\noindent where:
-\begin{align*}
-    y       & \text{ is the ground truth label vector,}                 \\
-    \hat{y} & \text{ is the predicted probability distribution vector,} \\
-    i       & \text{ iterates over all classes.}
-\end{align*}
+This operation involves convolving the input $\mathbf{x}$ with a filter $\mathbf{W}$ and adding a bias term $\mathbf{b}$.
 
-\subsubsection{Bilinear Interpolation }
-Bilinear interpolation is a widely used technique in image processing for estimating pixel values at non-integer coordinates within an image. This method is particularly valuable when scaling or resizing images, offering a smoother transition between neighboring pixels compared to simpler interpolation methods ensuring a smoother and visually appealing transition between pixel values, contributing to improved image quality in various computer graphics and computer vision applications.
-\noindent \subparagraph{Steps}
-\begin{enumerate}
-    \item \textbf{Identify Neighboring Pixels:}Given a non-integer coordinate (x, y), locate the four nearest pixels in the image: (x1, y1), (x1, y2), (x2, y1), and (x2, y2), defining a rectangular region
-
-    \item \textbf{Calculate Interpolation Weights:} Compute the horizontal (u) and vertical (v) interpolation weights based on the fractional part of the coordinates (x, y).
-          \begin{align}
-              u & = x - x_1 \label{eq:u_equation} \\
-              v & = y - y_1 \label{eq:v_equation}
-          \end{align}
-
-
-    \item \textbf{Perform Interpolation:} Interpolate along the vertical direction to obtain the interpolated value:
-          \begin{align}
-              I_{\text{interpolated}} & = (1 - v) \cdot I_{\text{top}} + v \cdot I_{\text{bottom}} \label{eq:interpolated_equation}
-          \end{align}
-
-
-          \text{where:}
-          \begin{align}
-              I_{\text{top}}    & = (1 - u) \cdot I(x_1, y_1) + u \cdot I(x_2, y_1) \label{eq:itop_equation}    \\
-              I_{\text{bottom}} & = (1 - u) \cdot I(x_1, y_2) + u \cdot I(x_2, y_2) \label{eq:ibottom_equation}
-          \end{align}
-
-
-\end{enumerate}
-\subsubsection{Layer Normalization}
-The Layer Normalization is applied independently to each position (or patch) in the input sequence.Layer Normalization is very similar to Batch normalization but layer normalization is favored because it works independently on each patch of the image sequence, aligning well with ViT's sequential processing.
-
-\noindent Given an input tensor $x$ at a particular position, the Layer Normalization is computed using the formula:
-
+\item{Batch Normalization}
 \begin{equation}
-    \text{LayerNorm}(x) = \frac{x - \text{mean}(x)}{\sqrt{\text{var}(x) + \epsilon}} \cdot \gamma + \beta \label{eq:layer_norm}
+\text{BatchNorm}(\mathbf{x}) = \frac{\mathbf{x} - \mu}{\sigma} \cdot \gamma + \beta
 \end{equation}
+Batch normalization normalizes the input $\mathbf{x}$ by subtracting the mean ($\mu$) and dividing by the standard deviation ($\sigma$). $\gamma$ and $\beta$ are learnable parameters.
 
-\noindent Here, $\text{mean}(x)$ and $\text{var}(x)$ represent the mean and variance of the input $x$ at that position, and $\gamma$ and $\beta$ are learnable parameters. $\epsilon$ is a small constant for numerical stability.
-
-\noindent \textbf{Importance:}
-Layer Normalization is crucial for stabilizing training by normalizing the activations at each position. It helps mitigate change in the distribution of the input during training, making the model less sensitive to changes in input distribution. This normalization facilitates more stable and efficient training, enabling the model to better capture complex hierarchical features in image data.
-
-\subsubsection{Positional Encoding}
-Positional encoding is used to provide information about the position of tokens in a sequence. Since transformers don't inherently understand the order of tokens, positional encoding helps inject spatial information into the input data.
-
-\noindent Formula for 1D positional encoding for a token at position $pos$ in a sequence of length $L$ with embedding dimension $d$:
-
+\item{ReLU Activation}
 \begin{equation}
-    \text{PE}(pos, 2i) = \sin\left(\frac{pos}{10000^{2i/d}}\right) \label{eq:pos_encoding_sin}
+\text{ReLU}(\mathbf{x}) = \max(0, \mathbf{x})
 \end{equation}
+ReLU is the Rectified Linear Unit activation function, introducing non-linearity to the model.
 
+ \item \textbf{Residual Block} \\
+  A residual block consists of two convolutional layers with batch normalization and ReLU activation, and a skip connection that adds the input to the output.
+  \begin{equation}
+  \begin{split}
+  \text{Output} &= \text{ReLU}\left(\text{BatchNorm}\left(\text{conv}\left(\text{ReLU}\left(\text{BatchNorm}\left(\text{conv}(\text{input})\right)\right)\right)\right)\right) \\
+  &\quad + \text{conv}(\text{input})
+  \end{split}
+  \end{equation}
+  
+  \item \textbf{Bottleneck Block}
+
+  A bottleneck block is a more efficient version of the basic block. It uses 1x1 convolutions to reduce dimensionality before and after the 3x3 convolution.
+  \begin{equation}
+    \begin{aligned}
+    \text{Output} = \text{ReLU}&\bigg(\text{BatchNorm}\Big(\text{conv1x1}\big(\text{ReLU}\big(\text{BatchNorm}\Big(\text{conv3x3}\big(\text{ReLU} \\
+    &\big(\text{BatchNorm}\Big(\text{conv1x1}(\text{input})\Big)\big)\big)\Big)\big)\Big)\big)\Big) \bigg) \\
+    &+ \text{input}
+    \end{aligned}
+    \end{equation}
+    
+
+ \end{itemize}   
+
+
+ \noindent\textbf{Cosine similarity}\\
+Cosine similarity is a measure of similarity between two non-zero vectors of an inner product space. It measures the cosine of the angle between two vectors and determines the similarity of their orientation. The cosine similarity between two vectors can be calculated as the dot product of the vectors divided by the product of their magnitudes. Given two vectors A and B, their cosine similarity is defined as:
+
+\noindent The cosine similarity formula is given by:
 \begin{equation}
-    \text{PE}(pos, 2i+1) = \cos\left(\frac{pos}{10000^{2i/d}}\right) \label{eq:pos_encoding_cos}
+    \cos(\theta) = \frac{A \cdot B}{\|A\| \cdot \|B\|}
 \end{equation}
-
-
-\noindent Here, $pos$ is the position, $i$ is the dimension, and $d$ is the embedding dimension. The positional encoding values are added to the original embeddings of the tokens.
-
-\noindent In essence, the formula generates unique sinusoidal patterns for each position and dimension, enabling the model to distinguish the order of tokens in the sequence. This helps transformers effectively process sequential data, such as text or images divided into patches.
-
-\subsubsection{Softmax Score}
-The softmax function is used to convert a vector of real numbers into a probability distribution. In the context of machine learning and neural networks, it is often applied to the raw scores or logits produced by the model. The softmax function ensures that the values in the resulting vector are between 0 and 1 and sum to 1. It's commonly used in the output layer of a classification model to obtain probabilities for each class.
-
-\noindent Given an input vector \(z\) with \(K\) elements, the softmax function is calculated as follows:
-\begin{equation}
-    \text{Softmax}(z)_i = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}} \label{eq:softmax}
-\end{equation}
-
-
-\noindent Here, \(\text{Softmax}(z)_i\) represents the \(i\)-th element of the resulting softmax vector. \(e\) is the base of the natural logarithm (Euler's number). The numerator is the exponentiation of the \(i\)-th element of \(z\), and the denominator is the sum of the exponentiations of all elements in \(z\).
-
-\noindent The softmax operation essentially transforms the input vector into a probability distribution, making it suitable for tasks like multiclass classification where the goal is to assign probabilities to different classes.
-
-\subsubsection{Adam Optimizer}
-
-\noindent The Adam optimizer, short for Adaptive Moment Estimation, combines the advantages of adaptive learning rates, momentum optimization, and the Root Mean Square Propagation (RMSProp) algorithm. Adam is known for its efficiency, stability, and adaptability across a variety of neural network architectures and datasets.
-
-\noindent Adam excels in handling large datasets with varying or sparse gradients. It dynamically adjusts learning rates for each parameter, enhancing adaptability during training. By integrating momentum and RMSProp techniques, Adam accelerates convergence and prevents local minima.
-
-\noindent The Adam optimizer updates model parameters based on the following mathematical expressions:
-
-\begin{enumerate}
-    \item \textbf{Initialization:}
-          \begin{equation}
-              m_0 = 0, \quad v_0 = 0
-          \end{equation}
-
-    \item \textbf{Moments computation (for obtaining minimum approximation)}
-          \begin{align}
-              m_t & = \beta_1 \cdot m_{t-1} + (1 - \beta_1) \cdot g_t   \\
-              v_t & = \beta_2 \cdot v_{t-1} + (1 - \beta_2) \cdot g_t^2
-          \end{align}
-
-    \item \textbf{Bias Correction:}
-          \begin{align}
-              \hat{m}_t & = \frac{m_t}{1 - \beta_1^t} \\
-              \hat{v}_t & = \frac{v_t}{1 - \beta_2^t}
-          \end{align}
-
-    \item \textbf{Update Parameters:}
-          \begin{equation}
-              \theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{\hat{v}_t} + \epsilon} \cdot \hat{m}_t
-          \end{equation}
-\end{enumerate}
 
 Where:
+\begin{align*}
+    A \cdot B & \text{ is the dot product of vectors A and B,} \\
+    \|A\| & \text{ is the magnitude of vector A,} \\
+    \|B\| & \text{ is the magnitude of vector B.}
+\end{align*}
+
+\noindent Let \( \mathbf{A} = [1, 0, 1, 0] \) represent User 1's interactions and \( \mathbf{B} = [1, 1, 1, 0] \) represent User 2's interactions.
+
+\noindent\textbf{The dot product} \( \mathbf{A} \cdot \mathbf{B} \) is calculated as follows:
+
+\[ \mathbf{A} \cdot \mathbf{B} = (1 \times 1) + (0 \times 1) + (1 \times 1) + (0 \times 0) = 2 \]
+
+% Subsection 4.2: Euclidean Norms
+\noindent\textbf{The Euclidean norm} of a vector \( \mathbf{X} \), denoted as \( \|\mathbf{X}\| \), is the square root of the sum of the squared elements of the vector.
+
+\[ \|\mathbf{A}\| = \sqrt{1^2 + 0^2 + 1^2 + 0^2} = \sqrt{2} \]
+\[ \|\mathbf{B}\| = \sqrt{1^2 + 1^2 + 1^2 + 0^2} = \sqrt{3} \]
+
+\noindent Substitute these values into the \textbf{cosine similarity} formula:
+
+\[ \text{Cosine Similarity}(\mathbf{A}, \mathbf{B}) = \frac{\mathbf{A} \cdot \mathbf{B}}{\|\mathbf{A}\| \cdot \|\mathbf{B}\|} \]
+
+\[ \text{Cosine Similarity}(\mathbf{A}, \mathbf{B}) = \frac{2}{\sqrt{2} \cdot \sqrt{3}} \]
+Calculating this expression gives the numerical value of the cosine similarity between User 1 and User 2.
+
+\noindent\textbf{Advantages of Cosine Similarity}
 \begin{itemize}
-    \item \( \eta \) is the learning rate.
-    \item \( \beta_1 \) and \( \beta_2 \) control the exponential decay rates for the moment estimates.
-    \item \( \epsilon \) is a small constant to prevent division by zero.
+    \item \textbf{Precision:} Cosine similarity improves pet matching precision, ensuring users receive more accurate recommendations aligned with their preferences.
+
+\item \textbf{Personalization:} Enhances user engagement by offering personalized pet suggestions based on individual preferences.
+
+\item \textbf{Scalability:} Cosine similarity's computational efficiency supports efficient information retrieval, ensuring app performance as the user and pet database grows.
 \end{itemize}
-
-\noindent These equations describe the adaptive learning rate mechanism and the combination of momentum and RMSProp, for Adams Optimizer.
-
-
-
-
-

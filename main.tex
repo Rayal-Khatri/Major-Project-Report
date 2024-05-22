@@ -2,22 +2,32 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{float}
+\usepackage{xspace}
+\usepackage{ragged2e}
 \usepackage{algorithm}
+\usepackage{booktabs}
 \usepackage[noend]{algpseudocode}
 \usepackage{datetime}
 \usepackage{subcaption}
 \usepackage{caption}
-\captionsetup{font=it}
+%\captionsetup{font=it}
 \usepackage{titlesec}
 \usepackage{tocloft}
 \usepackage{setspace}
 \usepackage{titletoc}
 \usepackage{changepage}
+\usepackage{url}
 \usepackage[inkscapearea=page]{svg}
 % Set font size for titles in Table of Contents, List of Figures, and List of Tables
-\renewcommand{\contentsname}{\normalfont\fontsize{14}{16}\bfseries Table of Contents}
-\renewcommand{\listfigurename}{\normalfont\fontsize{14}{16}\bfseries List of Figures}
-\renewcommand{\listtablename}{\normalfont\fontsize{14}{16}\bfseries List of Tables}
+\renewcommand{\contentsname}{\normalfont\fontsize{14}{16}\bfseries TABLE OF CONTENTS\hfill}
+\renewcommand{\listfigurename}{\centering\normalfont\fontsize{14}{16}\bfseries LIST OF FIGURES}
+\renewcommand{\listtablename}{\centering\normalfont\fontsize{14}{16}\bfseries LIST OF TABLES}
+\renewcommand{\UrlFont}{\normalfont\fontsize{14}{16}}
+\renewcommand{\cftloftitlefont}{\hfill\MakeUppercase}
+\renewcommand{\cftafterloftitle}{\hfill}
+\renewcommand{\cfttoctitlefont}{\hfill\Huge\bfseries\MakeUppercase}
+\renewcommand{\cftaftertoctitle}{\hfill} % Adds space after the title
 
 \usepackage{svg}
 
@@ -31,6 +41,15 @@
 
 \begin{document}
 
+
+
+
+\linespread{1.3}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0em}
+
+\cftsetindents{section}{1.5em}{2.1em}
+\cftsetindents{subsection}{3.6em}{3.1em}
 \cftsetindents{figure}{0em}{3em}
 \cftsetindents{table}{0em}{3em}
 \include{0ACover/1title}
@@ -60,19 +79,20 @@
 \include{0HAbstract/abstract}
 \newpage
 
+
 \tableofcontents
 \addtocontents{toc}{\protect\setlength{\cftbeforetoctitleskip}{0em}}
 \newpage
 
 
 \listoffigures
-\addcontentsline{toc}{section}{List of Figures}
+\addcontentsline{toc}{section}{\MakeUppercase{List of Figures}}
 \newpage
 \listoftables
-\addcontentsline{toc}{section}{List of Tables}
+\addcontentsline{toc}{section}{\MakeUppercase{List of Tables}}
 \newpage
 
-\addcontentsline{toc}{section}{List of Abbreviations} % Add Abstract to TOC
+\addcontentsline{toc}{section}{\MakeUppercase{List of Abbreviations}} % Add Abstract to TOC
 \include{0IAbbreviations/abbreviations}
 % \thispagestyle{empty}
 
@@ -130,22 +150,22 @@
 
 
 % \include{4Methodology/methodology}
-\input{4Methodology/Deepfakes}
+\input{4Methodology/Methodology_hlwpet}
 
-\input{4Methodology/learningfeatures}
+%\input{4Methodology/learningfeatures}
 % \include{4Methodology/Approach_of_Model}
-\input{4Methodology/Vision_Transformer}
+%\input{4Methodology/Vision_Transformer}
 % \input{4Methodology/benefits_of_vit}
 \input{4Methodology/mathematical_modeling}
-\input{4Methodology/Data_Collection}
-\newpage
-\input{4Methodology/Algorithm}
-\newpage
+%\input{4Methodology/Data_Collection}
+%\newpage
+%\input{4Methodology/Algorithm}
+%\newpage
 \include{4Methodology/Data_preprocessing}
 \nobreak
-\include{4Methodology/Working_principle}
-\include{4Methodology/verification}
-\include{4Methodology/Application development}
+%\include{4Methodology/Working_principle}
+%\include{4Methodology/verification}
+%\include{4Methodology/Application development}
 
 
 
@@ -160,8 +180,8 @@
 \include{8FutureEnhancements/future_enhancements}
 \newpage
 
-\include{7Limitations/limitations}
-\newpage
+%\include{7Limitations/limitations}
+%\newpage
 
 \include{6ExpectedOutcomes/expected_outcomes}
 \newpage
